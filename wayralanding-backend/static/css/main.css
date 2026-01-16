@@ -51,6 +51,11 @@ body {
   margin-right: 30px;
 }
 
+#three-root {
+  margin: auto;
+  margin-top: -250px;
+}
+
 .section {
   padding: 60px 20px;
   max-width: 1200px;
