@@ -7,4 +7,9 @@ export default defineConfig({
     strictPort: true,
     cors: true,
   },
+  build: {
+    manifest: true,
+    outDir: "dist",
+    emptyOutDir: true,
+  },
 });
