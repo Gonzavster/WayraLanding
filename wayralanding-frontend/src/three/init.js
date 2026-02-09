@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import modelUrl from "./low_poly_airplane.glb";
+import modelUrl from "./low_poly_airplane.glb?url";
 
 export function initThree(container) {
   // Scene
