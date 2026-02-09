@@ -15,6 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PROJ_DIR = Path(__file__).resolve().parent.parent.parent.parent
 print("BASE_DIR = ", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -117,9 +118,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "wayralanding-frontend/dist",
+    PROJ_DIR / "wayralanding-frontend/dist",
 ]
 
 # Default primary key field type
