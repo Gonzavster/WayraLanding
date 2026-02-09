@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 import json
 from pathlib import Path
+import logging
 
 register = template.Library()
 logger = logging.getLogger(__name__)
