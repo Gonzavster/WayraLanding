@@ -1,0 +1,46 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+
+            cd /home/ec2-user/proyectos/WayraLanding
+
+            echo "Pulling latest code..."
+            git pull origin develop
+
+            echo "Building frontend..."
+            cd wayralanding-frontend
+            npm ci
+            npm run build
+
+            echo "Copying manifest..."
+            cp dist/.vite/manifest.json dist/manifest.json
+
+            echo "Collecting static..."
+            cd ../wayralanding-backend
+            source /home/ec2-user/myVenv/bin/activate
+            python manage.py collectstatic --noinput
+
+            echo "Running migrations..."
+            python manage.py migrate --noinput
+
+            echo "Restarting gunicorn..."
+            sudo supervisorctl restart gunicorn
+
+            echo "Deploy complete."
