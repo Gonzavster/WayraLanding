@@ -41,6 +41,6 @@ jobs:
             python manage.py migrate --noinput
 
             echo "Restarting gunicorn..."
-            sudo supervisorctl restart gunicorn
+            supervisorctl restart gunicorn
 
             echo "Deploy complete."
